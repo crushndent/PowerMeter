@@ -1,0 +1,843 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Mains AC: non-invasive 3.0 | OpenEnergyMonitor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="http://openenergymonitor.org/emon/misc/favicon.ico" type="image/x-icon">
+  <link type="text/css" rel="stylesheet" media="all" href="mainAC_files/node.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/defaults.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/system.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/system-menus.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/user.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/fckeditor.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/gallery.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/gallery_filter.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/comment.css">
+<link type="text/css" rel="stylesheet" media="all" href="mainAC_files/style.css">
+<style type="text/css" media="all">@import "/emon/sites/all/themes/emon02A/user_bar.css";</style>
+    <script type="text/javascript"> </script>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script></head><body>
+
+<div id="box">
+
+<table id="header" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td id="logo">
+       <h1 class="site-name"><a href="http://openenergymonitor.org/emon/" title="Home">OpenEnergyMonitor</a></h1>    </td>
+    <td id="menu">
+            <ul class="links" id="navlist"><li class="menu-199 first"><a href="http://openenergymonitor.blogspot.com/" title="">Blog</a></li>
+<li class="menu-240"><a href="http://forums.openenergymonitor.org/" title="">Forums</a></li>
+<li class="menu-146"><a href="http://openenergymonitor.org/emon/node/5" title="People">People</a></li>
+<li class="menu-198"><a href="http://openenergymonitor.org/emon/node/21" title="Building upon the work and ideas of many people">Builds Upon</a></li>
+<li class="menu-170 last"><a href="http://openenergymonitor.org/emon/tracker" title="">Recent</a></li>
+</ul>      <form action="/emon/node/58" accept-charset="UTF-8" method="post" id="search-theme-form">
+<div><div id="search" class="container-inline">
+  <div class="form-item" id="edit-search-theme-form-1-wrapper">
+ <label for="edit-search-theme-form-1">Search this site: </label>
+ <input maxlength="128" name="search_theme_form" id="edit-search-theme-form-1" size="15" title="Enter the terms you wish to search for." class="form-text" type="text">
+</div>
+<input name="op" id="edit-submit" value="Search" class="form-submit" type="submit">
+<input name="form_build_id" id="form-47e274491e073350138c42af68979f94" value="form-47e274491e073350138c42af68979f94" type="hidden">
+<input name="form_id" id="edit-search-theme-form" value="search_theme_form" type="hidden">
+</div>
+
+</div></form>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><div></div></td>
+  </tr>
+</tbody></table>
+
+<table id="content" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+        <td valign="top">
+            <div id="main">
+        <div class="breadcrumb"><a href="http://openenergymonitor.org/emon/">Home</a></div>     
+        <div class="tabs"></div>
+                          <div class="node">
+            <span class="submitted"></span>
+    <div class="taxonomy"></div>
+    <div class="content"><h2>How to build a basic energy monitor -&nbsp;Mains AC: non-invasive 3.0</h2>
+<p><strong>Voltage and current measurement</strong></p>
+<p><img alt="" src="mainAC_files/vibasic.JPG" height="450" width="600"></p>
+<p>This guide details how to build a simple electricity energy monitor 
+on that can be used to measure how much electrical energy you use in 
+your home. It measures voltage with an AC to AC power adapter and 
+current with a clip on CT sensor, making the setup quite safe as no high
+ voltage work is needed. The energy monitor can calculate real power, 
+apparent power, power factor, rms voltage, rms current. All the 
+calculations are done in the digital domain on an Arduino.  The Arduino 
+can then be connected to a computer, data logger, lcd screen, Ethernet 
+link, etc to make use of the data.</p>
+<p><strong>Changes since last version</strong></p>
+<p><strong>Electronics</strong></p>
+<ul>
+<li>2x 10uF bias stabilizing capacitors added:&nbsp;<a href="http://openenergymonitor.blogspot.com/2010/03/reducing-noise-adding-capacitor.html">more info</a></li>
+<li>Changed Voltage measurement circuit</li>
+<li>Power for arduino comes from a seperate transformer to AC voltage measurement transformer.&nbsp;</li>
+</ul>
+<p><strong>Software</strong></p>
+<ul>
+<li>Arduino sketch rewrite, sketch now follows <a href="http://www.atmel.com/dyn/resources/prod_documents/doc2566.pdf">Atmel's 465 appnote</a> method, adding:
+<ul>
+<li>Phase calibration</li>
+<li>Digital high pass filter to remove offset.</li>
+</ul>
+</li>
+</ul>
+<h3>Step One – Gather Components</h3>
+<p><strong>You will need:</strong></p>
+<p class="rteindent1">1x Arduino <a href="http://www.oomlout.co.uk/arduino-duemilanove-br-updated-328-version-p-185.html?zenid=1f2d8abc7fe1ce7953446890ca648cbd">oomlout £23.67</a>&nbsp;,&nbsp;<a href="http://www.nuelectronics.com/estore/index.php?main_page=product_info&amp;cPath=1&amp;products_id=14">nuelectronics £16.99</a></p>
+<p><strong>Voltage sensing electronics:</strong></p>
+<p class="rteindent1">1x AC-AC Power Adapter <a href="http://uk.farnell.com/_/mb090a050uk-f/adaptor-uk-9vac-500ma/dp/1217066">farnell £2.67</a></p>
+<p class="rteindent1">1x 100kOhm resistor</p>
+<p class="rteindent1">3x 10kOhm resistors</p>
+<p class="rteindent1">1x 10uF capacitor</p>
+<p><strong>Current sensing electronics</strong> (you will need 2 of these for whole house monitoring <a href="http://openenergymonitor.org/emon/node/63">in the US</a>)</p>
+<p class="rteindent1">1x CT sensor <a href="http://www.efergy.com/Products/Accessories/EFERGY/DC-Extra-Sensor/pid-183351.aspx">efergy £7.50</a>&nbsp;,&nbsp;<a href="http://www.seeedstudio.com/depot/noninvasive-ac-current-sensor-100a-max-p-547.html?cPath=6">seeedstudio $11.50</a></p>
+<p class="rteindent1">1x 56Ohm – 100Ohm burden resistor (for more info on choosing a burden resistor look on the&nbsp;<a href="http://openenergymonitor.org/emon/node/59">detailed system design page</a>)</p>
+<p>
+</p>
+<p class="rteindent1">2x 10kOhm resistors</p>
+<p><strong>Other</strong></p>
+<p class="rteindent1">1x A breadboard and some single core wire.</p>
+<p class="rteindent1">Oomlout do a good arduino + breadboard bundle <a href="http://www.oomlout.co.uk/arduino-prototyping-bundle-br-ardp-p-186.html?zenid=1f2d8abc7fe1ce7953446890ca648cbd">here £29</a>&nbsp;</p>
+<h3>Step Two – Assemble the electronics</h3>
+<p>The electronics consist of the sensors (which produce signals 
+proportional to the voltage and current in the mains) and the sensor 
+electronics that convert these signals into a form the Arduino is happy 
+with.</p>
+<p>For a circuit diagram and detailed discussion of sensors and electronics look on the <a href="http://openenergymonitor.org/emon/node/59">detailed system design page</a>.</p>
+<p>Assemble the components as in the diagram:</p>
+<p><img alt="" src="mainAC_files/currentvoltage_bb.jpg" height="844" width="600"></p>
+<h3>Step Three – Upload the Arduino Sketch</h3>
+<p>The Arduino sketch is the piece of software that runs on the Arduino.
+ The Arduino converts the raw data from its analog input into a nice 
+useful values and then outputs them to serial.</p>
+<p><strong>Download</strong> the sketch here: <a href="http://openenergymonitor.org/emon/sites/default/files/basicmonitor.tar.gz">basicmonitor.tar.gz</a></p>
+<p>The sketch with a calibration method thanks to Eric Sandeen that 
+allows you to set the component values of the measurement circuit to 
+obtain a rough calibration that can be tweaked further for accuracy with
+ the calibration method at the bottom of this page. For further details 
+see the discussion in detailed system design.</p>
+<p><strong>Download</strong> the sketch with calibration method:<a href="http://openenergymonitor.org/emon/sites/default/files/basicSketchWCal.tar.gz"> basicSketchWCal.tar.gz</a></p>
+<p>and then upload it onto the Arduino. Then go to the Arduino serial 
+monitor and you should see values being printed to the scre, looking 
+something like this:</p>
+<p><img alt="" src="mainAC_files/vi.png" height="236" width="326"></p>
+<p>From left to right: Real Power, Apparent Power, Power Factor, Vrms, Irms.</p>
+<h3>Step Four - Calibration</h3>
+<p>If you compare the output from the serial monitor with the output 
+from a reference energy monitor (like a kill-a-watt plug in meter) they 
+probably wont be the same. To get accurate measurements the energy 
+monitor needs to be calibrated, as follows:</p>
+<p><strong>Step one – calibrating power factor</strong></p>
+<p>Power factor needs to be calibrated due to phase displacements from 
+the CT sensor, Power adapter and multiplexed ADC readings. To calibrate 
+choose a load that is reactive like a fridge or a grinder and a load 
+that's resistive like a heater. Compare the value for power factor on 
+your energy monitor and your reference meter. Look in the Arduino sketch
+ for the line:</p>
+<p class="rteindent1"><em>double PHASECAL = 1.0;</em></p>
+<p>Try different values until the power factor's agree for when you have
+ the reactive load connected and when you have the resistive load 
+connected. I found 2.3 worked well.</p>
+<p><strong>Step two – calibrating voltage and current</strong></p>
+<p>For best results choose a load that's within but close to the maximum
+ range of your energy monitor and your reference meter minus a couple of
+ hundred watts, most domestic plug in meters go up to about 3120W so 
+around 2000-2800W would be fine (as long as this is also within the 
+range of the energy monitor)</p>
+<p>If your using non-halogen heaters beware that the power that they 
+consume decreases for sometimes up to 10mins as they heat up. To take an
+ accurate calibration point wait until the power consumption is stable.</p>
+<p>Note down the Voltage and Current value off your reference meter and 
+from the Arduino serial monitor and then calculate the calibration 
+coefficients:</p>
+<p>Look in the Arduino sketch for the lines:</p>
+<p class="rteindent1"><em>double VCAL = 1.0; double ICAL = 1.0;</em></p>
+<p>Multiply the old VCAL by the new VCAL and replace the old value with the result.</p>
+<p>Upload the sketch and now hopefully your values should be a lot closer to what they should be.</p>
+<p><strong>kWh and Frequency</strong></p>
+<p>Add kWh and Frequency calculation with this sketch:</p>
+<p><a href="http://openenergymonitor.org/emon/sites/default/files/basicMonitorPlusKwhFreq.tar.gz">basicMonitorPlusKwhFreq.tar.gz</a></p>
+<p>
+</p>
+<p><strong>For more information see pages on:</strong></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/node/60">Accuracy</a></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/node/59">Detailed system design</a></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/node/61">AC Power Theory 1</a></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/node/62">AC Power Theory 2</a></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/node/63">Household wiring</a></p>
+<p class="rteindent1"><a href="http://openenergymonitor.org/emon/extend">Extend it</a></p>
+<p class="rteindent1"><strong>Experimental new sketch that may be more accurate </strong>- more details soon</p>
+<p class="rteindent1">
+<a href="http://openenergymonitor.org/emon/sites/default/files/mainsACtest.tar.gz">mainsACtest.tar.gz</a>  
+</p>
+</div>
+    <div class="links">» <ul class="links inline"><li class="comment_add first last"><a href="http://openenergymonitor.org/emon/comment/reply/58#comment-form" title="Share your thoughts and opinions related to this posting.">Add new comment</a></li>
+</ul></div>  </div>
+<div id="comments">
+  <a id="comment-1374"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1374" class="active">Hi there
+I'm in the US so we</a></h3>    <div class="submitted">Submitted by Chris (not verified) on Sat, 08/07/2010 - 20:34.</div>
+    <div class="content">
+     <p>Hi there</p>
+<p>I'm in the US so we have 240v across of two wires. i have a main, a solar pv and a subpanel to monitor - couple of questions </p>
+<p>how do you wire two CT's into the Arduino? Would each one go to an analog input port?<br>
+if I have mutliple CT's (6 in my case, 3 sets worth), i would be able to
+ see data from each one, and depending on how I wired it up, I could 
+then compute the necessary values?</p>
+<p>thanks!</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1374">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1378"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1378" class="active">Hey Chris
+Sounds like you</a></h3>    <div class="submitted">Submitted by TrystanLea on Thu, 08/12/2010 - 18:44.</div>
+    <div class="content">
+     <p>Hey Chris</p>
+<p>Sounds like you have an interesting setup to work with!</p>
+<p>To monitor mains in the US you need 2 CT's one for each live leg, and
+ one voltage measurement between GND and one of the live legs using a 
+step down AC-AC transformer as above.</p>
+<p>How does your PV system connect up? Could you monitor on the DC side?&nbsp;</p>
+<p>And yes you would need to connect each CT to a seperate analog channel.&nbsp;</p>
+<p>Im on holiday at the moment. so sorry for not much info. Let me know a
+ bit more about your pv setup and when I get back I will see if I can 
+help you bit further.</p>
+<p>Trystan</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1378">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1380"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1380" class="active">Hi Trystan - 
+thanks! 
+PV is</a></h3>    <div class="submitted">Submitted by Chris Zane (not verified) on Fri, 08/13/2010 - 07:21.</div>
+    <div class="content">
+     <p>Hi Trystan - </p>
+<p>thanks! </p>
+<p>PV is using microinveters, so my measurement would have be off the 240v ac feed. </p>
+<p>Sounds like it's doable - I'll need to go and get the parts now.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1380">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1401"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1401" class="active">&nbsp;How is your build going</a></h3>    <div class="submitted">Submitted by TrystanLea on Thu, 09/09/2010 - 00:04.</div>
+    <div class="content">
+     <p>&nbsp;How is your build going Chris?</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1401">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1403"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1403" class="active">Hi Trystan - 
+sorry, haven't</a></h3>    <div class="submitted">Submitted by Chris (not verified) on Thu, 09/09/2010 - 00:08.</div>
+    <div class="content">
+     <p>Hi Trystan - </p>
+<p>sorry, haven't had the opportunity to get all the parts yet.... 
+working on sourcing everything. Hopefully I'll get things in before the 
+end of the month (or maybe october) and find some time to do all this!</p>
+<p>Will post back on progress. </p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1403">reply</a></li>
+</ul></div>
+  </div>
+</div><a id="comment-1385"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1385" class="active">Chris, I'm in exactly the</a></h3>    <div class="submitted">Submitted by <a href="http://sandeen.net/wordpress" rel="nofollow">Eric</a> (not verified) on Sun, 08/29/2010 - 01:05.</div>
+    <div class="content">
+     <p>Chris, I'm in exactly the same boat, I also have a pv system w/ microinverters in the US.</p>
+<p>I had a whole-house monitor running from a meter pulse but my net 
+meter w/ the solar panels killed that setup, so now I'm back to looking 
+at Trystan's stuff.  Feel free to ping me, sounds like we're working on 
+the same thing at the same time.  :)</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1385">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1404"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1404" class="active">Hi Eric - 
+sounds like it! If</a></h3>    <div class="submitted">Submitted by Chris (not verified) on Thu, 09/09/2010 - 00:08.</div>
+    <div class="content">
+     <p>Hi Eric - </p>
+<p>sounds like it! If you get around to it first let me know what you ended up doing! =)</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1404">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1407"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1407" class="active">Hey Chris
+I need to order</a></h3>    <div class="submitted">Submitted by <a href="http://sandeen.net/wordpress" rel="nofollow">Eric Sandeen</a> (not verified) on Thu, 09/09/2010 - 02:13.</div>
+    <div class="content">
+     <p>Hey Chris</p>
+<p>I need to order some CTs still to really get going.  Right now I have
+ just a couple small ones, I may order some from the Brultech site (I'm 
+not sure how much I trust the seeedstudio ones...)  However I wonder if 
+we can put CTs for both phases in series and measure total current that 
+way on one analog channel... I'll have to think about how the phase 
+relationships on the legs might matter and/or work out ...</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1407">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1416"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1416" class="active">It should work. remember it's</a></h3>    <div class="submitted">Submitted by Chris Zane (not verified) on Mon, 09/13/2010 - 06:25.</div>
+    <div class="content">
+     <p>It should work. remember it's actually a single phase into our 
+panel - it's just at 240 and the panel is just doing the hot to neutral 
+to get 120v. </p>
+<p>I still need to get my arduino - I'm out here in hawaii so sometimes 
+shipping is a bit of a pain, I just need to decide and pull the trigger.
+ </p>
+<p>Where did you get your CT's from ? </p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1416">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1420"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1420" class="active">Chris - 
+I got some 20A CTs</a></h3>    <div class="submitted">Submitted by <a href="http://sandeen.net/" rel="nofollow">Eric</a> (not verified) on Wed, 09/22/2010 - 16:49.</div>
+    <div class="content">
+     <p>Chris - </p>
+<p>I got some 20A CTs from <a href="http://www.crmagnetics.com/" title="http://www.crmagnetics.com/">http://www.crmagnetics.com/</a> (CR8410's IIRC) for the solar circuit and some 100A Efergy CTs for the mains, from (in a roundabout way) <a href="http://www.energymonitoring.ca/" title="http://www.energymonitoring.ca">http://www.energymonitoring.ca</a>.  CR Magnetics also has some 100A clip-ons.</p>
+<p>-Eric</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1420">reply</a></li>
+</ul></div>
+  </div>
+</div></div></div></div></div></div></div><a id="comment-1349"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1349" class="active">What a great job you have</a></h3>    <div class="submitted">Submitted by Michael Smith (not verified) on Sun, 07/18/2010 - 05:59.</div>
+    <div class="content">
+     <p>What a great job you have done!</p>
+<p>It has inspired me to build one for myself. I have a house with grid 
+connected solar and 2 phases. I built a 2 phase and solar input based on
+ your design. The great thing is that with the power factor leading on 
+the solar phase all the export values are Negative and your normal 
+import values are positive. I am currently working on a perl script 
+which downloads the information from the Arduino via USB to my Centos 
+5.3 server into a Mysql database. I also added WattHours accumulated. 
+The Output looks like:<br>
+Freq, Frequency<br>
+Phase1,realpower,apparent power,power factor,Volts,current,Kwatthours,Watthours<br>
+Phase2,realpower,apparent power,power factor,Volts,current,Kwatthours,Watthours<br>
+Solar,realpower,apparent power,power factor,Volts,current,Kwatthours,Watthours<br>
+ExportSolar, Export/Import,WattHours exported since reset</p>
+<p>My  solar system is on Phase 2, The Export/Import value is determined
+ by adding Solar realpower with Phase 2 real power, a negative value 
+means that I am exporting. I have 3 Current transformers and 2 power 
+packs. I also added a individual calibration for each sensor. I also 
+added a input command to reset all the accumulated values. This is handy
+ because you can reset the counters at midnight and all the values you 
+see are just for today! All you need to do is send "r" to the Arduino. 
+When I am completely finished I will make all my code available to 
+everyone.</p>
+<p>Thanks for the inspiration!<br>
+Michael Smith</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1349">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1355"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1355" class="active">Hey Micheal
+Nice work! Yea it</a></h3>    <div class="submitted">Submitted by TrystanLea on Mon, 07/19/2010 - 22:57.</div>
+    <div class="content">
+     <p>Hey Micheal</p>
+<p>Nice work! Yea it would be really great to see your code once you 
+have done, if youd like to use the blog here your more than welcome I 
+can add you, just let me know</p>
+<p>Thanks</p>
+<p>Trystan</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1355">reply</a></li>
+</ul></div>
+  </div>
+</div><a id="comment-1346"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1346" class="active">Hello,
+Very nice project. I</a></h3>    <div class="submitted">Submitted by Tomas (not verified) on Tue, 07/13/2010 - 16:20.</div>
+    <div class="content">
+     <p>Hello,</p>
+<p>Very nice project. I was inspired to make my own power meter :)<br>
+I have one request. Can you explain abaut "Step one – calibrating power 
+factor". I don't understand how to do this. What is "reference meter"? 
+Is it some over precise power meter?<br>
+I have this one <a href="http://www.lemona.lv/LIUSE/NI/PM300-1.pdf" title="http://www.lemona.lv/LIUSE/NI/PM300-1.pdf">http://www.lemona.lv/LIUSE/NI/PM300-1.pdf</a> but it dosn't show power factor.</p>
+<p>"the power factor's agree for when you have the reactive load 
+connected and when you have the resistive load connected" - where p.f. 
+valuest have to be equal, on my power meter and reference power meter?</p>
+<p>Thank you.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1346">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1351"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1351" class="active">Hey Tomas
+Good to hear you've</a></h3>    <div class="submitted">Submitted by TrystanLea on Mon, 07/19/2010 - 20:42.</div>
+    <div class="content">
+     <p>Hey Tomas</p>
+<p>Good to hear you've build one!</p>
+<p>The reference meter I'm using is a pretty cheap but accurate enough meter similar to the one your using:&nbsp;<a href="http://www.maplin.co.uk/Module.aspx?ModuleNo=348228">http://www.maplin.co.uk/Module.aspx?ModuleNo=348228</a></p>
+<p>What's the value for power factor that you get with a purely 
+resistive load? You should get 0.99-1.00 If you do then its probably 
+calibrated well enough.</p>
+<p>"<span class="Apple-style-span" style="font-family: Verdana,Arial,Helvetica,sans-serif; border-collapse: collapse; line-height: 15px;">where p.f. valuest have to be equal, on my power meter and reference power meter?" - yes</span></p>
+<p>Trystan</p>
+<p>&nbsp;</p>
+<p>
+</p>
+<p>&nbsp;</p>
+<p>
+</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1351">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1357"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1357" class="active">Hi Trystan
+Thank you for the</a></h3>    <div class="submitted">Submitted by Tomas (not verified) on Thu, 07/22/2010 - 08:50.</div>
+    <div class="content">
+     <p>Hi Trystan</p>
+<p>Thank you for the answer.<br>
+Everything is working now. Power meter is showing pf=0.99 with heater connected to it.<br>
+Now it monitors 3 phases. In Lithuania we have Three-phase electrical instalation.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1357">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1360"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1360" class="active">&nbsp;Nice work Tomas!</a></h3>    <div class="submitted">Submitted by TrystanLea on Fri, 07/23/2010 - 13:10.</div>
+    <div class="content">
+     <p>&nbsp;Nice work Tomas!</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1360">reply</a></li>
+</ul></div>
+  </div>
+</div></div></div><a id="comment-1343"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1343" class="active">I ordered my equipment from</a></h3>    <div class="submitted">Submitted by Guest (not verified) on Wed, 07/07/2010 - 21:49.</div>
+    <div class="content">
+     <p>I ordered my equipment from seeedstudio a month and half ago and
+ I have still not received my package.  I have had to email them many 
+times before I got a response.  I spent a lot of money ordering stuff 
+because I have friends, who want to build one as well.  I do not think 
+that they are very good to deal with and suggest using another company.</p>
+<p>Not happy customer.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1343">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1345"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1345" class="active">&nbsp;Could I copy you in on the</a></h3>    <div class="submitted">Submitted by TrystanLea on Sun, 07/11/2010 - 10:07.</div>
+    <div class="content">
+     <p>&nbsp;Could I copy you in on the email, can you send me your email address? my email is on the people page.&nbsp;</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1345">reply</a></li>
+</ul></div>
+  </div>
+<a id="comment-1344"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1344" class="active">Thanks for letting me know,</a></h3>    <div class="submitted">Submitted by TrystanLea on Sun, 07/11/2010 - 10:02.</div>
+    <div class="content">
+     <p>Thanks for letting me know, that's really bad service! I did try
+ to email them once for information and had no reply too. But then I 
+know of a couple of people who have recieved their orders in as Im aware
+ a timely fashion. I will send them an email, to see if we can get 
+through to them with a few more emails.&nbsp;</p>
+<p>Trystan</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1344">reply</a></li>
+</ul></div>
+  </div>
+</div><a id="comment-1330"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1330" class="active">Have you noticed the voltage</a></h3>    <div class="submitted">Submitted by dzm (not verified) on Mon, 06/14/2010 - 03:06.</div>
+    <div class="content">
+     <p>Have you noticed the voltage meter wandering over time?</p>
+<p>I've got my voltage monitor dialed in (~36 seems to be my magic 
+number, FYI) such that the metered voltage pretty well reflects what the
+ Kill-A-Watt reports. The there's as much as .5v difference as the 
+metering starts, but after maybe ten minutes the two start to wander off
+ from each other. Right now the OpenEnergyMonitor is showing me 124.74v 
+while the Kill-A-Watt is reporting 120.7v. If I change the multiplier in
+ the sketch to compensate then things are good for ten minutes or so, 
+then things start to wander again. Hitting the Reset button doesn't 
+clear up the problem. Likewise, unplugging and reconnecting the 
+wall-wart does not bring the voltages into sync. And pulling the USB 
+connection from the Arduino, then reconnecting it, also has no positive 
+effect.</p>
+<p>Any thoughts on how to bring the metered values more consistently into sync?</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1330">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1336"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1336" class="active">Hey dzm
+Interesting problem,</a></h3>    <div class="submitted">Submitted by TrystanLea on Thu, 06/17/2010 - 14:07.</div>
+    <div class="content">
+     <p>Hey dzm</p>
+<p>Interesting problem, do you think it could it be related to the 
+temperature of the wall wart? When you unplug the wall-wart have you 
+tried leaving it too cool down before plugging it back in? I dont 
+remember having the same problem but will try to do some tests next week
+ see if I can shed some light on it.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1336">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1337"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1337" class="active">I don't think it's related to</a></h3>    <div class="submitted">Submitted by dzm (not verified) on Thu, 06/17/2010 - 18:21.</div>
+    <div class="content">
+     <p>I don't think it's related to wall-wart temp, but I don't know 
+that it isn't either. It could just be a cheap (and old) wall-wart 
+producing a range of voltage rather than a consistent step-down.</p>
+<p>I've left it all connected for days to see if things eventually level
+ out. What I observe is the reported value in the serial monitor slowly 
+wanderings from +/- 4.5v from what the Kill-A-Watt is reporting. At 
+times I'll see 124.5v when the K-A-W is reporting 120v (this was the 
+case when I began typing this text), at this moment I'm seeing 119.3v vs
+ 119.3v (from K-A-W), and I've seen it as low as 114v vs 118v K-A-W. 
+Over time it just slowly wanders from one extreme to the other.</p>
+<p>I may eventually purchase the new wall-wart you link to below just to see if this is a result of an old wart being finicky.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1337">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1342"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1342" class="active">Hey dzm
+Doing some test here</a></h3>    <div class="submitted">Submitted by TrystanLea on Fri, 06/25/2010 - 13:07.</div>
+    <div class="content">
+     <p>Hey dzm</p>
+<p>Doing some test here myself at the moment, My voltage does vary 
+around a bit, but more around the volt range, and it does seem to vary 
+at a rate a bit higher than the reference meter. When I switch on loads 
+like a heater however it does change at the same rate as the reference 
+meter.</p>
+<p>I wasnt sure to being with whether this difference in variation was 
+due to differences in smoothing between the energy monitor and reference
+ meter but a&nbsp;thought came to me that the reason for the variation 
+may be in the sketch, the current sketch takes a long window of samples 
+but doesn't check if it has sampled an integer number of wavelengths. I 
+have uploaded a new experimental sketch that does this check and I think
+ the output may be more stable, if you could test it and let me know 
+whether it gets rid of the voltage variation problem that would be 
+great!&nbsp;</p>
+<p><a href="http://openenergymonitor.org/emon/sites/default/files/mainsACtest.tar.gz" title="http://openenergymonitor.org/emon/sites/default/files/mainsACtest.tar.gz">http://openenergymonitor.org/emon/sites/default/files/mainsACtest.tar.gz</a></p>
+<p>Thanks!</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1342">reply</a></li>
+</ul></div>
+  </div>
+</div></div></div><a id="comment-1314"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1314" class="active">Great page, I was thinking of</a></h3>    <div class="submitted">Submitted by Jeremy (not verified) on Tue, 05/25/2010 - 16:15.</div>
+    <div class="content">
+     <p>Great page, I was thinking of starting something similar, glad to see you beat me too it.</p>
+<p>I look forward to trying it out, as I am doing my research project on a similar concept.</p>
+<p>two questions / thoughts - could someone modify the code to include a web feed? <a href="http://www.pachube.com/" title="http://www.pachube.com">http://www.pachube.com</a> is a good place to send data, then you can read or display it</p>
+<p>Second query - a web interface/display would be good - i am thinking of piwik, an open source version of Google Analytics.</p>
+<p>also a wordpress or drupal etc plugin would be cool, to brag about it!</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1314">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1318"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1318" class="active">Hey Jeremy
+Your research</a></h3>    <div class="submitted">Submitted by TrystanLea on Sun, 05/30/2010 - 08:58.</div>
+    <div class="content">
+     <p>Hey Jeremy</p>
+<p>Your research project sounds interesting, let me know how it develops.</p>
+<p>I've made a start on the web interface side of things here:</p>
+<p><a href="http://openenergymonitor.org/emon/node/48" title="http://openenergymonitor.org/emon/node/48">http://openenergymonitor.org/emon/node/48</a></p>
+<p>&nbsp;</p>
+<div>and I had a go at pachube a while back, at the time they didnt have
+ detailed graphing so I worked on the mysql flot method in the link, but
+ now they have better graphing I think it would be worth getting that 
+back up and running.&nbsp;</div>
+<div>&nbsp;</div>
+<div>I would like to develop the mysql flot web interface further, have 
+more info like daily kwh and look at adding a 'gaming' element that 
+could make reducing/managing energy easier and more fun!</div>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1318">reply</a></li>
+</ul></div>
+  </div>
+</div><a id="comment-1313"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1313" class="active">Do you happen to know of a</a></h3>    <div class="submitted">Submitted by dzm (not verified) on Tue, 05/25/2010 - 08:57.</div>
+    <div class="content">
+     <p>Do you happen to know of a 120V version of power adapter?</p>
+<p>As you mention elsewhere, the mains in the US are 120v, not 240v. 
+Unfortunately my random Googling isn't finding me a 120v version of the 
+power adapter you link to above. Do you (or anyone else) happen to know 
+of a 120v version of this beastie?</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1313">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1317"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1317" class="active">&nbsp;Hey Dzm, this one should do</a></h3>    <div class="submitted">Submitted by TrystanLea on Sun, 05/30/2010 - 08:42.</div>
+    <div class="content">
+     <p>&nbsp;Hey Dzm, this one should do the job from 
+newark:&nbsp;http://www.newark.com/triad-magnetics/wau12-200/psu-ext-plug-in-12v-2-4w/dp/96M0298</p>
+<p>All the best</p>
+<p>&nbsp;</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1317">reply</a></li>
+</ul></div>
+  </div>
+<a id="comment-1315"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1315" class="active">Aha! I found an old one in a</a></h3>    <div class="submitted">Submitted by dzm (not verified) on Tue, 05/25/2010 - 19:57.</div>
+    <div class="content">
+     <p>Aha! I found an old one in a drawer. It seems the USRobotics 
+modems of the mid-1990s used 9v AC in, so their transformers can be 
+re-purposed. It would be nice to know where to source these new though.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1315">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1319"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1319" class="active">Didnt see your second post</a></h3>    <div class="submitted">Submitted by TrystanLea on Sun, 05/30/2010 - 09:00.</div>
+    <div class="content">
+     <p>Didnt see your second post here, the USRobotics one sounds just right</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1319">reply</a></li>
+</ul></div>
+  </div>
+</div></div><a id="comment-1304"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1304" class="active">Hi,
+Very interesting project</a></h3>    <div class="submitted">Submitted by Dave (not verified) on Sat, 05/15/2010 - 10:59.</div>
+    <div class="content">
+     <p>Hi,</p>
+<p>Very interesting project and as i needed to only get the CT sensor (I
+ already had all the components needed to give it a try) I could not 
+wait to get started. I hope to expand it with the ethernet shild to send
+ the results to a webservice to log the results into a SQL database for 
+historical analysis and charting, when complete i will be happy to let 
+you have the source code, etc.  However I have a newbee question.</p>
+<p>I have stopped as when I connect the CT sensor over the incomming 
+mains to the house (I am in the UK by the way so only have 1 sensor) it 
+generates a buzzing sound.  Is this normal?  I have disconnected it as I
+ am not sure.</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1304">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1307"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1307" class="active">&nbsp;Hello Dave, someone else</a></h3>    <div class="submitted">Submitted by TrystanLea on Sat, 05/15/2010 - 14:05.</div>
+    <div class="content">
+     <p>&nbsp;Hello Dave, someone else mentioned this too, but we didnt 
+get to the bottom of it. It's not something I have experienced so Im not
+ sure what's happening. Which sensor do you have? do you know the number
+ of turns? and max current rating? What happens when you add a 50-100Ohm
+ burden resistor across the CT terminals?</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1307">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1308"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1308" class="active">Trystan, Thanks for the quick</a></h3>    <div class="submitted">Submitted by Dave (not verified) on Sun, 05/16/2010 - 09:25.</div>
+    <div class="content">
+     <p>Trystan, Thanks for the quick response.  I have one of the efergy CTs (<a href="http://www.efergy.com/Products/efergy-shop-Accessories/EFERGY/DC-Extra-Sensor/pid-184333.aspx" title="http://www.efergy.com/Products/efergy-shop-Accessories/EFERGY/DC-Extra-Sensor/pid-184333.aspx">http://www.efergy.com/Products/efergy-shop-Accessories/EFERGY/DC-Extra-S...</a>)
+ and to be honest I was in such a rush to start the project I did not 
+check what the max current rating was.  However as soon as I place a 100
+ Ohm resistor across the terminals the buzzing has stopped. Will try and
+ get the project moving again later today and will let you know how 
+things progress.  Is here the right area to post comments &amp; 
+questions?  I have now registered on the forum site - would that be 
+better?</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1308">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1311"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1311" class="active">Hey Dave, good to hear that</a></h3>    <div class="submitted">Submitted by TrystanLea on Thu, 05/20/2010 - 11:02.</div>
+    <div class="content">
+     <p>Hey Dave, good to hear that the 100ohm resistor stopped the 
+noise, must be something to do with the current transformer saturating 
+as it had no load. You can post comments here or on the forum, whichever
+ you prefer, although it may be easier to keep track of discussions on 
+the forum...</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1311">reply</a></li>
+</ul></div>
+  </div>
+</div></div></div><a id="comment-1284"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1284" class="active">Hi Trystan,
+   First, great</a></h3>    <div class="submitted">Submitted by Simon (not verified) on Fri, 04/23/2010 - 13:37.</div>
+    <div class="content">
+     <p>Hi Trystan,</p>
+<p>   First, great site!  </p>
+<p>I have a couple questions for you.  I've tried to ask them in the 
+forum, but it doesnt send the confirmation email so I can't post there.</p>
+<p>I am considering building your energy monitor, after giving up on a 
+Current Transformer+DS2438 (1 wire voltmeter) because there is no way 
+for a 1-wire system to measure the phase shift.</p>
+<p>I'd like to know what are the arduino analog input sensors capable 
+of?  They are 6 sensors, all capable of measuring current 0 to 5V, 
+either AC or DC.  Correct?    How fast/often does it measure AC current?</p>
+<p>Also, my ultimate reason in going DIY way instead of just getting a 
+TED 5000 is to be able to monitor the mains AND each breakers 
+separately.  Having "only" 6 analog sensors is a limitation for me, 
+given that I could only monitor the phase shift (1 input), the mains (2 
+inputs  because I'm in the US)   and either 3 110V breakers or 1 110V 
+breaker and 1 220V breaker.  Is this correct?  Is there any easy way to 
+add more analog sensors to the Arduino without buying another one?</p>
+<p>Another option for me would be to use the arduino only for reading 
+the AC current (phase shift) and using cheap (4$ each ) DS2438's to read
+ each of the dozen or so clamps I would need.  Then again,  6x 4$ is 
+about the cost of an arduino with 6 sensors, so I might as well go 
+all-arduino.</p>
+<p>What do you think?<br>
+Thanks for putting this site up!</p>
+<p>Cheers,<br>
+Simon</p>
+<p>I've been googling around, but I can't seem to find the answer to this.  </p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1284">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1291"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1291" class="active">Hey&nbsp;Simon, I will just repeat</a></h3>    <div class="submitted">Submitted by TrystanLea on Tue, 04/27/2010 - 17:47.</div>
+    <div class="content">
+     <p>Hey&nbsp;Simon, I will just repeat my reply to your email here, 
+incase its useful for anyone else. If anyone else is having forum sign 
+in problems email me and I will try and see why its not working, seems 
+to work for some and not others... I cant quite work out why.</p>
+<div>The arduino has 6 analog voltage inputs, that can measure voltage 
+in the range of 0 to 5V. I recommend looking up analog digital 
+converters, ADC's, arduino ADC for more in depth info.&nbsp;The circuit 
+and sensor connected to the arduino determines whether the arduino 
+analog input measures AC mains current or AC mains voltage.&nbsp;</div>
+<div>&nbsp;</div>
+<div>The arduino usually samples instantaneous voltage and current at a 
+rate of around 2800 times a second, However a reading for rms current 
+requires many samples. A typical rms current, rms voltage, real power...
+ set of measurement may take around half a second. The longer the time 
+(number of samples) the more accurate, the shorter the less 
+accurate.&nbsp;Have a look at detailed system design and AC 
+power&nbsp;measurement&nbsp;theory here&nbsp;<a target="_blank" href="http://openenergymonitor.org/emon/node/56">http://<wbr>openenergymonitor.org/emon/<wbr>node/56</a>&nbsp;</div>
+<div>&nbsp;</div>
+<div>To measure rms mains AC current on many circuit breakers you could 
+use a multiplexer to increase the amount of inputs as much as you want. 
+Found this guide here that might be useful:&nbsp;<a target="_blank" href="http://www.arduino.cc/playground/Learning/4051">http://www.arduino.cc/<wbr>playground/Learning/4051</a>&nbsp;With this method you would have to measure the power at one breaker, then sequentially the next and the next and so on.</div>
+<div>&nbsp;</div>
+<div>I'd recommend building the above first, monitoring only one outlet.
+ Once you have that working, try adding more current sensors and current
+ sensing circuits to the other arduino inputs, you will need to modify 
+the code to read sequentially each current sensor 
+which&nbsp;shouldn't&nbsp;be too hard.&nbsp;Once your happy with that, 
+have a go at using a multiplexer as in the example to gain even more 
+inputs! :D</div>
+<div>&nbsp;</div>
+<div>Another thought Micheal who commented here:&nbsp;http://openenergymonitor.org/emon/node/56#comment-1281</div>
+<div>has used a Arduino MEGA which has 12 analog inputs, he has documented his work here:&nbsp;<a href="http://www.komputer.de/wordpress/?p=8">http://www.komputer.de/wordpress/?p=8</a></div>
+<p>&nbsp;</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1291">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1293"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1293" class="active">Thanks Trystan!
+    I will</a></h3>    <div class="submitted">Submitted by Simon (not verified) on Tue, 04/27/2010 - 18:14.</div>
+    <div class="content">
+     <p>Thanks Trystan!</p>
+<p>    I will keep reading about the arduino, this is very interesting.  </p>
+<p>I assume that getting the Arduino MEGA to start with would be cheaper
+ and easier than getting a normal arduino+ the multiplexer, especially 
+when taking shipping into account.</p>
+<p>     I'll google around, but what would be a good tutorial for 
+arduino?  Will just any PCB fit as a "home made shield" on top of the 
+arduino?  </p>
+<p>BTW, Here's a link to Michael's page, translated to english by google:<br>
+<a href="http://translate.google.com/translate?js=y&amp;prev=_t&amp;hl=fr&amp;ie=UTF-8&amp;layout=1&amp;eotf=1&amp;u=http%3A%2F%2Fwww.komputer.de%2Fwordpress%2F%3Fp%3D8&amp;sl=de&amp;tl=en" title="http://translate.google.com/translate?js=y&amp;prev=_t&amp;hl=fr&amp;ie=UTF-8&amp;layout=1&amp;eotf=1&amp;u=http%3A%2F%2Fwww.komputer.de%2Fwordpress%2F%3Fp%3D8&amp;sl=de&amp;tl=en">http://translate.google.com/translate?js=y&amp;prev=_t&amp;hl=fr&amp;ie=UTF-8&amp;layout...</a></p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1293">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1294"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1294" class="active">Would this Arduino MEGA board</a></h3>    <div class="submitted">Submitted by Simon (not verified) on Tue, 04/27/2010 - 18:25.</div>
+    <div class="content">
+     <p>Would this Arduino MEGA board do?<br>
+<a href="http://cgi.ebay.ca/Arduino-MEGA-ATmega1280-16AU-USB-board-USB-cable-16AU-/180499293375?cmd=ViewItem&amp;pt=LH_DefaultDomain_0&amp;hash=item2a0698a4bf" title="http://cgi.ebay.ca/Arduino-MEGA-ATmega1280-16AU-USB-board-USB-cable-16AU-/180499293375?cmd=ViewItem&amp;pt=LH_DefaultDomain_0&amp;hash=item2a0698a4bf">http://cgi.ebay.ca/Arduino-MEGA-ATmega1280-16AU-USB-board-USB-cable-16AU...</a></p>
+<p>Thanks!</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1294">reply</a></li>
+</ul></div>
+  </div>
+<div class="indented"><a id="comment-1295"></a>
+  <div class="comment comment-published">
+    <h3 class="title"><a href="http://openenergymonitor.org/emon/node/58#comment-1295" class="active">Hey Simon,&nbsp;
+Thanks for the</a></h3>    <div class="submitted">Submitted by TrystanLea on Thu, 04/29/2010 - 17:39.</div>
+    <div class="content">
+     <p>Hey Simon,&nbsp;</p>
+<p>Thanks for the translation link.</p>
+<p>The Arduino MEGA board looks like the one you need, but I cant quite 
+tell if it comes with the bootloader installed, If you look halfway down
+ the page you see the pic with the: not included USBtinyISP bootloader. 
+Maybe its worth dropping them an email to check whether they have 
+already loaded the arduino bootloader to the board. Otherwise it might 
+be a safer bet is to go with the official Arduino Mega.</p>
+<p>The Arduino Mega is meant to be compatible with most shields so you should be ok.</p>
+<p>Trystan</p>
+<p>&nbsp;</p>
+         </div>
+    <div class="links">» <ul class="links"><li class="comment_reply first last"><a href="http://openenergymonitor.org/emon/comment/reply/58/1295">reply</a></li>
+</ul></div>
+  </div>
+</div></div></div></div></div>
+      
+              </div>
+    </td>
+      </tr>
+</tbody></table>
+
+<div id="footer">
+  <p>This is a project to develop and build open source energy 
+monitoring and analysis tools for energy efficiency and distributed 
+renewable microgeneration.<strong><br>
+</strong></p>   
+</div>
+
+
+</div>
+</body></html>

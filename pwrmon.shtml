@@ -1,0 +1,733 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noarchive">
+<title>jarv.org</title>
+<link rel="alternate" type="application/rss+xml" title="Projects posted on jarv.org" href="http://jarv.org/rss-projects.xml">
+
+<link type="text/css" rel="stylesheet" href="pwrmon_files/global.css"><meta name="robots" content="INDEX,FOLLOW">
+
+<!--
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-78464-1";
+urchinTracker();
+</script> -->
+</head><body>
+<div class="header">
+
+<span class="gotobar bar">
+
+<a href="http://jarv.org/projects.shtml">projects</a> | <a href="http://jarv.org/about.shtml">about</a></span></div>
+
+
+<div class="content browse">
+
+
+<h1> Home power Monitoring </h1>
+
+<p>
+<span style="font-size: 0.8em;">
+<a href="http://jarv.org/pwrmon.shtml">About</a> |
+<a href="http://jarv.org/pwrmon_current.shtml">Current power usage</a> |
+<a href="http://jarv.org/pwrmon_hour.shtml">Summary by hour</a>  |
+<a href="http://jarv.org/pwrmon_week.shtml">Summary by weekday</a> 
+</span>
+</p><p>
+
+
+<span style="font-size: 0.8em;">
+<i><b>Note:</b> The charts haven't been updated in a while since I'm in the process of moving</i>
+</span>
+
+</p><div style="float: right;">
+<img src="pwrmon_files/graph.jpg" alt="power graph">
+</div>
+<p>
+This is a DIY project using current transducers, an arduino, and some 
+custom software
+to monitor power consumption for an entire house.  
+The power measurements are graphed and made public on a webserver.
+
+</p><p>
+The end result is a slightly cheaper hack of the <a href="http://www.theenergydetective.com/index.html">The Energy Detective</a>.
+
+</p><p>
+This data shared online is currently represented as both <a href="http://jarv.org/pwrmon_current.shtml">current power consumption</a> as well as
+<a href="http://jarv.org/pwrmon_hour.shtml">as summary charts</a>.
+
+</p><p>
+
+</p><ul>
+<li><b>What this can do </b>is visualize when appliances, lights, computers, etc are using home power. </li>
+<li><b>What this cannot do</b> is detect smaller devices like cellphone chargers, dangling wallwarts or anything else that consumes less than 10Watts.</li>
+</ul>
+
+<p>
+
+Please monitor <a href="http://jarv.org/rss-projects.xml">my rss feed</a> if you want to know when this project is updated. If you have questions or comment feel free to  <a href="http://jarv.org/about.shtml">send me mail</a> or leave
+a message on the <a href="http://hackaday.com/2009/07/05/home-power-monitoring/">hack-a-day comment thread</a>.
+
+
+
+</p><h1>Similar projects</h1>
+
+There are a number of similar projects already out there for
+home power monitoring.
+If you have a project similar to this one not listed here
+I would love to hear about it.
+
+<ul>
+
+<li><a href="http://www.picobay.com/projects/2009/01/real-time-web-based-power-charting.html">Jason Winters' Pico-Projects</a> - Similar project using CTs with
+an IO bridge</li>
+
+<li><a href="http://www.ladyada.net/make/tweetawatt/">ladyada's tweet-a-watt</a>
+ - Uses a Kill-a-Watt for monitoring power usage on one outlet</li>
+
+<li><a href="http://pluggy.is-a-geek.com/index.html">Pluggy is a geek</a> 
+-  amazing "let's monitor everything possible" project.
+This is very interesting because he compares power usage monitored by CTs vs
+monitoring power at the meter.</li>
+
+</ul>
+
+
+
+<h2>Overview Diagram</h2>
+
+<p>
+
+<img src="pwrmon_files/pwr_arduino.png" alt="pwr diagram">
+
+</p><p>
+
+</p><h2>Materials</h2>
+
+<ul>
+
+<li> <a href="http://www.theenergydetective.com/store/accessories/ct.html">Current Transducers</a> - $46.00 for 2</li>
+<li> <a href="http://www.google.com/products?q=arduino+diecimila">Arduino Diecimilia Microcontroller</a> ~ $20 </li>
+<li> <a href="http://www.google.com/products?q=arduino+ethernet+shield">Arduino Ethernet Shield</a> ~ $45 </li> 
+<li> Small sheet plexiglass with mounting screws and standoffs ~ $5</li>
+<li> Router capable of running <a href="http://openwrt.org/">openwrt</a> or something can serve a cgi script (optional) ~ $40 </li>
+<li> Web server to host the power charts (optional) ~ $5/month</li>
+
+</ul>
+
+<p>
+
+Total cost ~ $110 (not counting what I already had lying around) 
+
+If money is tight there are a few things that can make this cheaper by about fifty bucks:
+
+</p><p> 
+
+</p><ul>
+<li> Adding a serial port to a router running openwrt or using a dedicated computer connected to the arduino serial. 
+This will elimate the need for the ethernet shield which is a very expensive component</li>
+<li> Hosting the charts locally or on a server with a dedicated, static 
+ip address will eliminate the need for the openwrt router as well as the
+ ethernet shield (more details on that later) </li>
+<li>Web hosting is optional if you only want to view the data locally and you have a machine that's always on at home.  
+A cheap netbook would be sufficient for the task.</li>
+</ul>
+
+<p>
+
+
+
+
+
+</p><h2><a name="accuracy">Accuracy</a></h2>
+
+Here are some factors that will influence accuracy for all
+current transducer monitoring systems like this one.
+
+<p>
+
+<b>Power Factor</b><br> <br>
+
+<a href="http://en.wikipedia.org/wiki/Power_factor">Power factor</a>
+is a number between 0 and 1 and is the ratio of real power to the
+product of the rms current times the rms voltage.
+Power factor differs from device to device and will need
+to be approximated to caculate over all power usage.
+A power factor of .60 will be used as an approximation for the
+overall power calculation.  In order to calculate power
+factor the voltage would need to be monitored as well as the
+current for each phase.
+</p><p>
+<b>Voltage</b><br><br>
+
+Voltage can vary depending on what is connected to the home.
+For calculating power the voltage will be approximated to
+be 120V(rms).
+</p><p>
+
+<b>Accuracy of the ADC</b><br><br>
+
+Measuring the voltage from the CT is done using an Arduino microcontroller.
+With 3.3V as the analog reference the resolution of the ADC is .0032mV.
+This voltage on the CT is 213mA of current which corresponds to an
+apparent power resolution of ~ 25Watts.  This means the apparent
+power calculations on the arduino will only be as accurate as the
+resolution.
+</p><p>
+<b>RMS vs Peak Approximations</b> <br><br>
+
+In the first version of this project
+a very simple peak voltage calculation was being
+used with a fudge factor to make a guess at 
+the scaling factor for overall power.
+</p><p>
+To improve this slightly the arduino is now making an RMS caluculation instead of using
+the peak value.
+</p><p>
+Because the signal from the CT is not level shifted the arduino
+only sees the signal when it is above zero volts.
+Instead of applying a DC bias to the signal only half the samples
+will be used for the RMS calculation.
+
+Assuming the signal is symetrical on the X-axis the following  code
+calculates an approximate RMS value for a specified
+number of evenly spaced samples.
+
+</p><p>
+
+</p><pre>float rms_val1 = 0;
+float rms_val2 = 0;
+for (int cnt=0; cnt&lt;SAMPLES; cnt++) {
+
+        val1 = analogRead(S1_PIN);
+        val2 = analogRead(S2_PIN);
+
+        rms_val1 = rms_val1 + sq( (float)val1 );
+        rms_val2 = rms_val2 + sq( (float)val2 );
+}
+
+rms_val1 = sqrt(rms_val1 / (SAMPLES/2) );
+rms_val2 = sqrt(rms_val2 / (SAMPLES/2) );
+</pre>
+
+<p>
+A 100W spotlight, a fan, a toaster oven and a computer were used
+as devices to test the accuracy of the home power monitor.
+
+</p><p>
+</p><div style="float: right; padding: 20px;">
+<img src="pwrmon_files/testsubjects_fire.jpg" alt="test_subjects" width="500px">
+</div>
+
+<p>
+
+For each device the CT was hooked up to an oscilliscope as well
+as a DMM to measure the RMS voltage of the CT. During the testing
+one of the power phases was shut completely off with the exception
+of the device being tested. (the scope and arduino were on the other
+phase, isolated from the device being tested)
+The toaster oven also makes a good firestarter.
+
+
+
+</p><p>
+
+<b>Kill-a-watt measuremnts</b>
+</p><ul>
+<li>Voltage = voltage measurement on the Kill-a-Watt</li>
+<li>Current = current measurement on the Kill-a-Watt</li>
+<li>Power = power measurement on the Kill-a-Watt</li>
+<li>Power factor = ratio of voltage x current to the measured power</li>
+</ul>
+
+<p>
+
+<b>Arduino measurements</b>
+</p><ul>
+<li>RMS measurement = The value recorded by the ADC from the CT</li>
+<li>Voltage = ADC value converted to voltage ( value * .0032 )</li>
+<li>CT Voltage Accuracy = The ratio of the measured voltage to the voltage measu
+red on the CT with a DMM</li>
+<li>Calculated Current = (Voltage) * 200 / 3 </li>
+<li>Current Accuracy = The ratio of the calculated current to the measurement ma
+de by the Kill-a-Watt</li>
+</ul>
+
+<p>
+</p><div style="clear: both;">
+
+
+<table class="device_test">
+<tbody><tr>
+<th> Device / Measurements</th>
+<th> Measurements on the Kill-a-Watt </th>
+<th> Measurements on the Arduino </th>
+</tr>
+
+
+<tr>
+
+        <td>
+        <b>Spotlight</b> <br> <br>
+        <img src="pwrmon_files/spotlight.jpg" alt="spotlight" width="250">
+        <br>
+        <br>
+        <b>CT DMM measurement = .015Vrms</b>
+        </td>
+
+
+        <td>
+        <ul>
+        <li>Voltage = 124.8Vrms</li>
+        <li>Current = .85Arms</li>
+        <li>Power = 104W</li>
+        <li>Power factor = .99</li>
+        </ul>
+        </td>
+
+        <td>
+        <ul>
+        <li>RMS measurement = 3.38</li>
+        <li>Voltage = .0108Vrms</li>
+        <li>CT Voltage Accuracy = 72%</li>
+        <li>Calculated Current = .7211Arms</li>
+        <li>Current Accuracy = 85.8%</li>
+        </ul>
+        </td>
+
+</tr>
+
+
+
+
+<tr>
+
+        <td>
+        <b>Fan </b> <br> <br>
+        <img src="pwrmon_files/fan.jpg" alt="fan" width="250">
+        <br>
+        <br>
+        <b>CT DMM measurement = .022Vrms</b>
+        </td>
+
+
+        <td>
+        <ul>
+        <li>Voltage = 124.5Vrms</li>
+        <li>Current = 1.18Arms</li>
+        <li>Power = 134W</li>
+        <li>Power factor = .92</li>
+        </ul>
+        </td>
+
+        <td>
+        <ul>
+        <li>RMS measurement = 5.12</li>
+        <li>Voltage = .0164Vrms</li>
+        <li>CT Voltage Accuracy = 74%</li>
+        <li>Calculated Current = 1.092Arms</li>
+        <li>Current Accuracy = 92.5%</li>
+        </ul>
+        </td>
+
+</tr>
+
+
+
+
+<tr>
+
+        <td>
+        <b>Toaster Oven</b> <br> <br>
+        <img src="pwrmon_files/toaster.jpg" alt="toaster" width="250">
+        <br>
+        <br>
+        <b>CT DMM measurement = .166Vrms</b> 
+        </td>
+
+
+        <td>
+        <ul>
+        <li>Voltage = 117.0Vrms</li>
+        <li>Current = 10.77Arms</li>
+        <li>Power = 1250W</li>
+        <li>Power factor = .99</li>
+        </ul>
+        </td>
+
+        <td>
+        <ul>
+        <li>RMS measurement = 55.88</li>
+        <li>Voltage = .1788Vrms</li>
+        <li>CT Voltage Accuracy = 107.8%</li>
+        <li>Calculated Current = 11.92Arms</li>
+        <li>Current Accuracy = 110.7%</li>
+        </ul>
+        </td>
+
+</tr>
+
+
+
+
+<tr>
+
+        <td>
+        <b>Computer</b> <br> <br>
+        <img src="pwrmon_files/computer.jpg" alt="computer" width="250">
+        <br>
+        <br>
+        <b>CT DMM measurement = .032Vrms</b>
+        </td>
+
+        <td>
+        <ul>
+        <li>Voltage = 124.6Vrms</li>
+        <li>Current = 2.02Arms</li>
+        <li>Power = 160W</li>
+        <li>Power factor = .64</li>
+        </ul>
+        </td>
+
+        <td>
+        <ul>
+        <li>RMS measurement = 10.36</li>
+        <li>Voltage = .0332Vrms</li>
+        <li>CT Voltage Accuracy = 103.8%</li>
+        <li>Calculated Current = 2.21Arms</li>
+        <li>Current Accuracy = 109.4%</li>
+        </ul>
+        </td>
+
+</tr>
+
+
+
+
+</tbody></table>
+
+</div>
+<br>
+<br>
+<hr>
+<h2>Hardware</h2>
+<div style="padding: 10px; float: right;">
+<img src="pwrmon_files/box.jpg" alt="electrical box" width="350">
+</div>
+
+The analog to digital converter on the Arduino has a 10bit resolution.  
+This means it can measure 2^10 or 1024 distinct states.  
+A spec sheet wasn't available from the CT which makes it difficult to 
+calculate the power conversion.  The output of the CT is 0-3V and since 
+the default range of the ADC is 0-5V the analog reference 
+was tied to 3.3V through a 5k
+resistory (pictured below).
+For a 0-3.3V input on the ADC / 1024 bits the arduino will measure 3.2mv
+ for every bit.
+
+<p>
+
+</p><p>
+Installation of the clamp-on current transducers 
+and mounting the arduino was the easiest part 
+of this project.  Using plexiglass, screws and stand-offs
+the arduino was mounted next to the 
+breaker box.  The CTs were clamped on the mains and fed through the 
+side down to the arduino analog inputs.
+</p><p>
+
+The waveforms that come off the CTs are pictured on the right below.  
+(right click for higher resolution).  Between the two phases there 180degree
+difference as expected.  
+
+
+
+</p><div style="padding: 20px; clear: both;" align="center">
+<table>
+<tbody><tr>
+<td> <img src="pwrmon_files/plexiglass.jpg" alt="plexiglass mounts" width="250"> </td>
+<td> <img src="pwrmon_files/mounted.jpg" alt="mounted board" width="250"> </td>
+<td> <img src="pwrmon_files/scope.jpg" alt="scope" width="250"> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+
+<h2>Software</h2>
+
+<h3>Arduino Sketch</h3>
+
+The arduino samples the the input from the ADC and posts it 
+to a cgi sitting on the linksys router using the ethernet shield.
+The input is sinusoidal so the rms value is calculated for 
+10k samples. Once the sampling is complete the arduino takes
+NUM_READINGS and averages them together which is posted to the cgi.
+
+<p>
+
+The rate at which the arduino sends data to the webserver tobe recorded in the 
+database is about 1 measurement every 20 seconds.
+
+</p><p>
+ 
+</p><pre>#include &lt;Ethernet.h&gt;
+
+#define S1_PIN 0    // input pin for first inductive sensor
+#define S2_PIN 5    // input pin for second inductive sensor
+#define SAMPLES 10000 // number of samples to take
+#define NUM_READINGS 10 // number of readings to average
+int val1 = 0;
+int val2 = 0;
+int reading_cnt = 0; // counter for 1 second samples
+float total_rms1 = 0;
+float total_rms2 = 0;
+
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+byte ip[] = { 192, 168, 0, 177 };
+byte gateway[] = { 192, 168, 0, 1 };
+byte subnet[] = { 255, 255, 255, 0 };
+byte server[] = { 192, 168, 0, 1 }; // router.springfield
+
+Client client(server, 80);
+
+void setup() {
+  Ethernet.begin(mac, ip, gateway, subnet);
+  analogReference(EXTERNAL);
+  Serial.begin(9600);
+
+  delay(1000);
+  Serial.println("Connecting...");
+
+}
+
+void loop() {
+
+  int max_val1 = 0;
+  int max_val2 = 0;
+  float rms_val1 = 0;
+  float rms_val2 = 0;
+
+  for (int cnt=0; cnt &lt; SAMPLES; cnt++) {
+
+    val1 = analogRead(S1_PIN);
+    val2 = analogRead(S2_PIN);
+    rms_val1 = rms_val1 + sq((float)val1);
+    rms_val2 = rms_val2 + sq((float)val2);
+
+  }
+
+  rms_val1 = sqrt(rms_val1 / (SAMPLES/2) );
+  rms_val2 = sqrt(rms_val2 / (SAMPLES/2) );
+
+  total_rms1 = total_rms1 + rms_val1;
+  total_rms2 = total_rms2 + rms_val2;
+
+
+  reading_cnt++;
+  if (reading_cnt &gt;= NUM_READINGS) {
+
+    float average_rms1 = total_rms1 / NUM_READINGS;
+    float average_rms2 = total_rms2 / NUM_READINGS;
+
+    Serial.print("AVG VALUES *RMS* - ");
+    Serial.print(average_rms1);
+    Serial.print("   ");
+    Serial.println(average_rms2);
+
+    if (client.connect()) {
+      Serial.println("Sending data");
+
+      client.print("GET /cgi-bin/relay.pl?value1=");
+      client.print(average_rms1);
+    Serial.print("   ");
+    Serial.println(average_rms2);
+
+    if (client.connect()) {
+      Serial.println("Sending data");
+
+      client.print("GET /cgi-bin/relay.pl?value1=");
+      client.print(average_rms1);
+      client.print("&amp;value2=");
+      client.print(average_rms2);
+      client.println(" HTTP/1.1");
+      client.println();
+      client.stop();
+    } else {
+      Serial.println("Failed to connect to client");
+    }
+
+    total_rms1 = 0;
+    total_rms2 = 0;
+    reading_cnt = 0;
+  }
+
+}
+
+
+</pre>
+
+
+
+<h3>Moving the data from the arduino to shared web hosting</h3>
+
+<h4>Router on the local network</h4>
+
+The arduino ethernet shield is not capable of DNS lookups which means it
+needs to talk to something that has a static ip address.  Most shared
+web hosting consist of multiple servers that use the dns name to route
+http requests.  To work around this issue a linksys router
+running the openwrt linux operating system was used to host a cgi 
+that relays the 
+data from the arduino to my web hosting.
+
+<p>
+
+</p><pre>use Socket;
+use strict;                                               
+
+
+print "Content-Type: text/html; charset=ISO-8859-1\n\n";
+
+# Read the reading from the GET request
+
+my @qstring = split ('&amp;', $ENV{'QUERY_STRING'});
+die "wrong number of values"  unless (scalar @qstring == 2);
+
+# Relay the readings to power.jarv.org
+
+socket(SH, PF_INET, SOCK_STREAM, getprotobyname('tcp')) or die $!;
+my $dest = sockaddr_in (80, inet_aton('power.jarv.org'));
+connect (SH, $dest) or die $!;
+print SH "\nGET /post.pl?$qstring[0]&amp;$qstring[1] HTTP/1.1\n" .
+           "Host: power.jarv.org\n" .
+            # BASE64 encoded username:password
+           "Authorization: Basic ************************\n\n";
+close SH;
+
+
+</pre>
+<p>
+
+The base64 encoded username-password is for minimal security on 
+the shared web hosting server.  
+
+
+</p><h4>Storing the data in an sqlite db</h4>
+
+For the purpose of posting the power readings on my shared web hosting
+a subdomain was created called power.jarv.org.  This is just a paranoid
+step as it keeps it isolated from my main web directory.
+
+<p>
+
+This is the database schema.  There is one table that stores
+the epoch time and the two values recorded for each power phase.
+
+</p><pre>CREATE TABLE data (
+        timestamp          INTEGER UNIQUE,
+        value1             INTEGER,
+        value2             INTEGER
+);
+</pre>
+
+<p>
+
+Very simple, one table and one row per entry. 
+If you can think of better ways to store this
+data and report please <a href="http://jarv.org/about.shtml">let me know</a>, 
+I considered using rrdtool 
+but thought this offered the most flixibility.
+
+
+
+</p><pre>!/usr/bin/perl -w
+use strict;
+use Data::Dumper;
+use CGI qw/:standard/;
+use DBI;
+use constant DBNAME =&gt; [path to sqlite database]
+
+print header;
+
+my $ts = time();
+my $v1 = param('value1')    or die "Value1 not in parameter list";
+my $v2 = param('value2')    or die "Value2 not in parameter list";
+
+my $dbargs = {AutoCommit =&gt;1, PrintError =&gt;1};
+my $dbh = DBI-&gt;connect("dbi:SQLite:dbname=" . DBNAME, "", "",$dbargs)
+                or die "Unable to connect to the db";
+$dbh-&gt;do(
+        "insert or ignore into data values ($ts, $v1, $v2)");
+$dbh-&gt;disconnect;
+</pre>
+
+
+<p>
+
+This simple script will take the data which is encoded in the
+http query string sent from the arduino ethernet shield and relay
+it to another cgi sitting on power.jarv.org.
+
+
+</p><h3>Generating the Flash Charts</h3>
+
+Finally once the data is collected into the sqlite database the charts are
+periodically generated.  To do this a perl script is run in a cron job
+that connects to the database and outputs json files for 
+<a href="http://teethgrinder.co.uk/open-flash-chart-2/">open flash charts</a>.
+
+<p>
+
+I have two types of charts that are created, one is a regular line chart and
+the other is a summary chart that averages data over time and presents it 
+as a bar graph.
+
+</p><p>
+
+The perl script is set up as a cron job that runs on the shared web hosting
+server every 10 minutes or so.   Runtime statistics are presented at the 
+top of each page.
+
+</p><p>
+
+<a href="http://jarv.org/power/generate-json.txt">Perl script for generating flash charts</a>
+
+</p><p>
+
+
+</p></div>
+<br>
+<br>
+<br>
+<div align="center">
+
+<span style="font-size: 0.5em;">
+Copyright (c) jarv.org 
+Verbatim copying and redistribution of this entire page are permitted provided this notice is preserved.
+</span>
+<br>
+<span style="font-size: 0.6em;"><a href="http://validator.w3.org/check/referer">Validate (nerd)</a></span>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "http://www.jarv.org/piwik/" : "http://www.jarv.org/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="pwrmon_files/piwik.js" type="text/javascript"></script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://www.jarv.org/piwik/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag -->
+</body></html>

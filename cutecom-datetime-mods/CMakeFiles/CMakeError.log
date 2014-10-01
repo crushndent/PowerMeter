@@ -1,0 +1,210 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c
+
+The output was:
+No such file or directory
+
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_WIN’ undeclared (first use in this function)
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: Leaving directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_WIN
+  cmakeRequireSymbol(0,&Q_WS_WIN);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_QWS’ undeclared (first use in this function)
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: Leaving directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_QWS
+  cmakeRequireSymbol(0,&Q_WS_QWS);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_MAC’ undeclared (first use in this function)
+/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: Leaving directory `/home/tom/workspace/cutecom/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/workspace/cutecom/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_MAC
+  cmakeRequireSymbol(0,&Q_WS_MAC);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_WIN’ undeclared (first use in this function)
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_WIN
+  cmakeRequireSymbol(0,&Q_WS_WIN);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_QWS’ undeclared (first use in this function)
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: Leaving directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_QWS
+  cmakeRequireSymbol(0,&Q_WS_QWS);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -I/usr/include/qt4    -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: error: ‘Q_WS_MAC’ undeclared (first use in this function)
+/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:25: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: Leaving directory `/home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /home/tom/Desktop/Dropbox/Projects/PowerMeter/cutecom-datetime-mods/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_MAC
+  cmakeRequireSymbol(0,&Q_WS_MAC);
+#endif
+  return 0;
+}
+
